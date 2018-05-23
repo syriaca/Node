@@ -5,20 +5,30 @@
 
 const http = require('http');
 
+const hostname = '127.0.0.1';
 const port = 8000;
 
 const server = http.createServer((request, response) => {
-  response.statusCode = 200;
-  response.end('Hello World!\n');
-}).listen(port);
-console.log(`Server running at http://:${port}/`);
-
+  homeRoute(request, response);
+}).listen(port)
+  console.log(`Server running at http://${hostname}:${port}/`);
 
 // 2. Handle HTTP route GET /  and POST / i.e. Home
+function homeRoute(request, response) {
   //if the url === "/" && GET
+  if(request.url === "/") {
     //show search field
+    response.statusCode = 200;
+    response.setHeader('Content-Type', 'text/plain');
+    response.write('Header\n');
+    response.write('Search\n');
+    response.end('Footer\n');
+  }
+
+
   //if url === "/" && POST
     // redirect to /username
+}
 
 // 3. Handle HTTP Route GET / username i.e. /username
   //if url === "/....."
