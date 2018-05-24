@@ -1,3 +1,5 @@
+var Profile = require("./profile.js");
+
 // Handle HTTP route GET /  and POST / i.e. Home
 function home(request, response) {
     //if the url === "/" && GET
@@ -21,13 +23,31 @@ function user(request, response) {
         response.statusCode = 200;
         response.setHeader('Content-Type', 'text/plain');
         response.write('Header\n');
-        response.write(username + '\n');
-        response.end('Footer\n');
+
         //get json from Treehouse
-        // on "end" 
+        var studentProfile = new Profile(username);
+
+        // on "end"
+        studentProfile.on("end", function(profileJSON){
             // show the profile html
+            // Store the vales which we need
+            var values = {
+                avatarUrl: profileJSON.gravatar_url,
+                username: profileJSON.profile_name,
+                badges: profileJSON.badges.length,
+                javaScriptPoints: profileJSON.points.JavaScript
+            }
+            // Simple response            
+            response.write(values.username+': has '+values.badges+' badges\n');
+            response.end('Footer\n');
+        });
         // on "error"
+        studentProfile.on("error",function(error){
             // show the error html
+            response.end('Footer\n');
+        });
+
+
     }  
 };
 
