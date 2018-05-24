@@ -44,6 +44,7 @@ function user(request, response) {
         // on "error"
         studentProfile.on("error",function(error){
             // show the error html
+            response.write(error.message + '\n');
             response.end('Footer\n');
         });
 
