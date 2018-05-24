@@ -35,7 +35,7 @@ function user(request, response) {
                 avatarUrl: profileJSON.gravatar_url,
                 username: profileJSON.profile_name,
                 badges: profileJSON.badges.length,
-                javaScriptPoints: profileJSON.points.JavaScript
+                javascriptPoints: profileJSON.points.JavaScript
             }
             // Simple response            
             response.write(values.username+': has '+values.badges+' badges\n');
