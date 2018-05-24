@@ -8,9 +8,9 @@ function home(request, response) {
         //show search field
         response.statusCode = 200;
         response.setHeader('Content-Type', 'text/plain');
-        renderer.view('header',{}, response);
-        renderer.view('search',{}, response);
-        renderer.view('footer',{}, response);
+        renderer.view('header', {}, response);
+        renderer.view('search', {}, response);
+        renderer.view('footer', {}, response);
         response.end();
     }
     //if url === "/" && POST
@@ -27,7 +27,7 @@ function user(request, response) {
         response.setHeader('Content-Type', 'text/plain');
 
         // Render header
-        renderer.view('header',{}, response);
+        renderer.view('header', {} , response);
 
         //get json from Treehouse
         var studentProfile = new Profile(username);
@@ -42,9 +42,9 @@ function user(request, response) {
                 javascriptPoints: profileJSON.points.JavaScript
             }
             // show the profile html
-            renderer.view('profile',profileValues , response);            
+            renderer.view('profile', profileValues, response);            
             // Render Footer
-            renderer.view('footer',{}, response);
+            renderer.view('footer', {}, response);
             // Simple response
             response.end();
         });
@@ -53,9 +53,9 @@ function user(request, response) {
         studentProfile.on('error',function(error){
             // show the error html
             renderer.view('error',{errorMessage: error.message}, response);
-            renderer.view('search',{}, response); 
+            renderer.view('search', {}, response); 
             // Render Footer
-            renderer.view('footer',{}, response);
+            renderer.view('footer', {}, response);
             response.end();            
         });
     }  
